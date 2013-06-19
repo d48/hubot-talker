@@ -34,7 +34,7 @@ class Talker extends Adapter
 
     bot.on "Users", (message)->
       for user in message.users
-        self.userForId(user.id, user)
+        self.robot.brain.userForId(user.id, user)
 
     bot.on "TextMessage", (room, message)->
       unless self.robot.name == message.user.name
@@ -63,7 +63,8 @@ class Talker extends Adapter
     self.emit "connected"
 
   userForMessage: (room, message)->
-    author = @userForId(message.user.id, message.user)
+    # author = @userForId(message.user.id, message.user)
+    author = @robot.brain.userForId(message.user.id, message.user)
     author.room = room
     author
 
